@@ -1,4 +1,4 @@
-Date: 21th Jan, 2023
+Date: 21st Jan, 2023
 
 Problem: https://leetcode.com/problems/restore-ip-addresses/
 

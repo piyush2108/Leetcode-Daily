@@ -1,4 +1,4 @@
-Date: 22th Jan, 2023
+Date: 22nd Jan, 2023
 
 Problem: https://leetcode.com/problems/palindrome-partitioning/description/
 

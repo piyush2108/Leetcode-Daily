@@ -1,4 +1,4 @@
-Date: 23th Jan, 2023
+Date: 23rd Jan, 2023
 
 Problem: https://leetcode.com/problems/find-the-town-judge/description/
 
