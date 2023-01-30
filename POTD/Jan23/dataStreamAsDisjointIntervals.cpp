@@ -1,55 +1,67 @@
-Date: 28th Jan, 2023
+// Date: 28th Jan, 2023
 
-Problem: https://leetcode.com/problems/data-stream-as-disjoint-intervals/
+// Problem: https://leetcode.com/problems/data-stream-as-disjoint-intervals/
 
-Solution -->
-class SummaryRanges {
+// Solution -->
+class SummaryRanges
+{
 public:
-    SummaryRanges() {
-        
+    SummaryRanges()
+    {
     }
-    
-    void addNum(int value) {
+
+    void addNum(int value)
+    {
         auto it = _map.lower_bound(value);
         bool merged = false;
-        if(it != _map.begin()) {
+        if (it != _map.begin())
+        {
             auto prev = it;
             --prev;
-            if(prev->second + 1 >= value) {
+            if (prev->second + 1 >= value)
+            {
                 merged = true;
                 prev->second = max(prev->second, value);
             }
         }
 
-        if(it != _map.end()) {
-            if(it->first - 1 <= value) {
-                if(merged) {
+        if (it != _map.end())
+        {
+            if (it->first - 1 <= value)
+            {
+                if (merged)
+                {
                     auto prev = it;
                     --prev;
-                    if(prev->second >= it->first - 1) {
+                    if (prev->second >= it->first - 1)
+                    {
                         prev->second = max(prev->second, it->second);
                         _map.erase(it);
                     }
-                } else {
+                }
+                else
+                {
                     merged = true;
-                    if(it->first != value) {
+                    if (it->first != value)
+                    {
                         pair<int, int> p = *it;
                         p.first = min(p.first, value);
                         it = _map.insert(it, p);
                         ++it;
-                        if(it != _map.end())
+                        if (it != _map.end())
                             _map.erase(it);
                     }
                 }
             }
         }
-        if(!merged)
+        if (!merged)
             _map.insert(it, {value, value});
     }
-    
-    vector<vector<int>> getIntervals() {
+
+    vector<vector<int>> getIntervals()
+    {
         vector<vector<int>> intervals;
-        for(auto const & p : _map)
+        for (auto const &p : _map)
             intervals.push_back({p.first, p.second});
         return intervals;
     }

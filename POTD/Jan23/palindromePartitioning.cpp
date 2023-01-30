@@ -1,11 +1,13 @@
-Date: 22nd Jan, 2023
+// Date: 22nd Jan, 2023
 
-Problem: https://leetcode.com/problems/palindrome-partitioning/description/
+// Problem: https://leetcode.com/problems/palindrome-partitioning/description/
 
-Solution -->
-class Solution {
+// Solution -->
+class Solution
+{
 public:
-    vector<vector<string>> partition(string s) {
+    vector<vector<string>> partition(string s)
+    {
         vector<vector<string>> ans;
 
         vector<string> str;
@@ -13,26 +15,33 @@ public:
         return ans;
     }
 
-    void helper(int index, string s, vector<vector<string>> &ans, vector<string> &str){
+    void helper(int index, string s, vector<vector<string>> &ans, vector<string> &str)
+    {
         int n = s.size();
 
-        if(index == n){
+        if (index == n)
+        {
             ans.push_back(str);
             return;
         }
 
-        for(int i=index; i<n; i++){
-            if(isPalindrome(s, index, i)){
-                str.push_back(s.substr(index, i-index+1));
-                helper(i+1, s, ans, str);
+        for (int i = index; i < n; i++)
+        {
+            if (isPalindrome(s, index, i))
+            {
+                str.push_back(s.substr(index, i - index + 1));
+                helper(i + 1, s, ans, str);
                 str.pop_back();
             }
         }
     }
 
-    bool isPalindrome(string s, int start, int end){
-        while(start <= end){
-            if(s[start] != s[end]){
+    bool isPalindrome(string s, int start, int end)
+    {
+        while (start <= end)
+        {
+            if (s[start] != s[end])
+            {
                 return false;
             }
             start++;

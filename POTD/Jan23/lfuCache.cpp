@@ -1,9 +1,10 @@
-Date: 29th Jan, 2023
+// Date: 29th Jan, 2023
 
-Problem: https://leetcode.com/problems/lfu-cache/
+// Problem: https://leetcode.com/problems/lfu-cache/
 
-Solution --> 
-class LFUCache {
+// Solution -->
+class LFUCache
+{
     int capacity, minFreq;
     unordered_map<int, pair<int, int>> keyValFreq;
     unordered_map<int, list<int>> freqKey;
@@ -12,7 +13,8 @@ class LFUCache {
 public:
     LFUCache(int capacity) : capacity(capacity) {}
 
-    int get(int key) {
+    int get(int key)
+    {
         if (keyValFreq.find(key) == keyValFreq.end())
             return -1;
         int freq = keyValFreq[key].second;
@@ -20,21 +22,26 @@ public:
         freqKey[freq].emplace_front(key);
         keyIter[key] = freqKey[freq].begin();
         keyValFreq[key].second = freq;
-        
-        if (freqKey[minFreq].empty()) minFreq = freq;
-        
+
+        if (freqKey[minFreq].empty())
+            minFreq = freq;
+
         return keyValFreq[key].first;
     }
 
-    void put(int key, int value) {
-        if (capacity <= 0) return;
-        
-        if (get(key) != -1) {
+    void put(int key, int value)
+    {
+        if (capacity <= 0)
+            return;
+
+        if (get(key) != -1)
+        {
             keyValFreq[key].first = value;
             return;
         }
 
-        if (keyValFreq.size() == capacity) {
+        if (keyValFreq.size() == capacity)
+        {
             int delKey = freqKey[minFreq].back();
             freqKey[minFreq].pop_back();
             keyValFreq.erase(delKey);

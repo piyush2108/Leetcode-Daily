@@ -1,12 +1,14 @@
-Date: 24th Jan, 2023
+// Date: 24th Jan, 2023
 
-Problem: https://leetcode.com/problems/snakes-and-ladders/
+// Problem: https://leetcode.com/problems/snakes-and-ladders/
 
-Solution -->
-class Solution {
+// Solution -->
+class Solution
+{
 public:
-    int snakesAndLadders(vector<vector<int>>& board) {
-        
+    int snakesAndLadders(vector<vector<int>> &board)
+    {
+
         int steps = 0;
         queue<int> q;
         q.push(1);
@@ -15,32 +17,40 @@ public:
 
         vector<vector<bool>> visited(n, vector<bool>(n));
 
-        visited[n-1][0] = true;
-        while(q.size() != 0){
+        visited[n - 1][0] = true;
+        while (q.size() != 0)
+        {
             int z = q.size();
 
-            for(int i=0; i<z; i++){
+            for (int i = 0; i < z; i++)
+            {
                 int front = q.front();
-                if(front == n*n){
+                if (front == n * n)
+                {
                     return steps;
                 }
                 q.pop();
 
-                for(int j=1; j<=6; j++){
-                    if(j+front > n*n){
+                for (int j = 1; j <= 6; j++)
+                {
+                    if (j + front > n * n)
+                    {
                         break;
                     }
 
-                    pair<int, int> p = nextPos(j+front, n);
-                    if(visited[p.first][p.second]){
+                    pair<int, int> p = nextPos(j + front, n);
+                    if (visited[p.first][p.second])
+                    {
                         continue;
                     }
                     visited[p.first][p.second] = true;
-                    if(board[p.first][p.second] != -1){
+                    if (board[p.first][p.second] != -1)
+                    {
                         q.push(board[p.first][p.second]);
                     }
-                    else{
-                        q.push(j+front);
+                    else
+                    {
+                        q.push(j + front);
                     }
                 }
             }
@@ -50,11 +60,13 @@ public:
         return -1;
     }
 
-    pair<int, int> nextPos(int x, int n){
-        int r = n - (x-1)/n-1;
-        int c = (x-1)%n;
-        if(r%2 == n%2){
-            return {r, n-c-1};
+    pair<int, int> nextPos(int x, int n)
+    {
+        int r = n - (x - 1) / n - 1;
+        int c = (x - 1) % n;
+        if (r % 2 == n % 2)
+        {
+            return {r, n - c - 1};
         }
         return {r, c};
     }
